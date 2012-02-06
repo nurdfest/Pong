@@ -4,8 +4,6 @@ import game.pong.core.Ball;
 import game.pong.core.Controls;
 import game.pong.core.Paddle;
 import game.pong.core.Pong;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -41,7 +39,7 @@ public class Window extends JFrame {
 	private Paddle p2 = new Paddle(p2start.x, p2start.y);
 	
 	
-	private Ball ball = new Ball(centerOfWindow.x, centerOfWindow.y);
+	private Ball ball = new Ball(centerOfWindow.x, centerOfWindow.y, p1);
 	
 	/**
 	 * Sole constructor. Initializes a new Window object.
@@ -66,17 +64,6 @@ public class Window extends JFrame {
 		addKeyListener(c);
 		
 		Pong p = new Pong(ball);
-	}
-	
-	
-	public void collision() {
-		if (ball.getBallRectangle().intersects(p1.getPaddleRectangle())) {
-			ball.setXPos(1);
-		}
-		
-		if (ball.getBallRectangle().intersects(p1.getPaddleRectangle())) {
-			ball.setXPos(-1);
-		}
 	}
 
 	/* Creates an image of the current window based on the window's

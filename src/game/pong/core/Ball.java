@@ -3,9 +3,6 @@ package game.pong.core;
 import java.awt.Rectangle;
 import java.util.Random;
 
-/*
- * Just testing to see if this is added as a commit
- */
 public class Ball implements Runnable {
 
 	private final int B_WIDTH = 10;
@@ -13,15 +10,81 @@ public class Ball implements Runnable {
 	
 	private int xPos;
 	private int yPos;
-	private int randomPos;
+	private int xDir;
+	private int yDir;
 	
 	private Rectangle ball;
 	
-	public Ball(int xPos, int yPos) {
+	private Paddle paddle;
+	
+	public Ball(int xPos, int yPos, Paddle p) {
 		this.xPos = xPos;
 		this.yPos = yPos;
+		this.paddle = p;
+		
+		int xMove, yMove;
+		
+		Random rand = new Random();
+		
+		xMove = rand.nextInt(1);
+		
+		if (xMove == 0)
+			xMove--;
+		
+		setXDir(xMove);
+		
+		yMove = rand.nextInt(1);
+		
+		if (yMove == 0)
+			yMove--;
+		
+		setYDir(yMove);
 		
 		ball = new Rectangle(this.xPos, this.yPos, B_WIDTH, B_HEIGHT);
+	}
+	
+	public void move() {
+		collision();
+		this.xPos += this.xDir;
+		this.yPos += this.yDir;
+
+		
+	}
+	
+	public void collision() {
+		
+		if (this.getXPos() <= 3) {
+			this.setXDir(1);
+		}
+		if (this.getXPos() >= 630) {
+			this.setXDir(-1);
+		}
+		
+		if (this.getYPos() < 26) {
+			this.setYDir(1);
+		}
+		if (this.getYPos() > 468) {
+			this.setYDir(-1);
+		}
+		
+		if (ball.intersects(paddle.getPaddleRectangle())) {
+			System.out.println("IT WORKS");
+			this.setXDir(1);
+		}
+		
+		if (ball.intersects(paddle.getPaddleRectangle())) {
+			this.setXDir(-1);
+		}
+	}
+	
+	public void run() {
+		try {
+			while (true) {
+				move();
+				Thread.sleep(5);
+			}
+		}
+		catch (Exception e) { System.err.print(e.getMessage()); }
 	}
 
 	public int getXPos() {
@@ -40,6 +103,22 @@ public class Ball implements Runnable {
 		this.yPos += yPos;
 	}
 
+	public int getXDir() {
+		return xDir;
+	}
+
+	public void setXDir(int xDir) {
+		this.xDir = xDir;
+	}
+
+	public int getYDir() {
+		return yDir;
+	}
+
+	public void setYDir(int yDir) {
+		this.yDir = yDir;
+	}
+
 	public int getB_WIDTH() {
 		return B_WIDTH;
 	}
@@ -51,41 +130,4 @@ public class Ball implements Runnable {
 	public Rectangle getBallRectangle() {
 		return ball;
 	}
-	
-	public void move() {
-		collision();
-		
-		int xMove, yMove;
-		Random rand = new Random();
-		
-		xMove = rand.nextInt(1);
-		yMove = rand.nextInt(1);
-		
-		if (xMove == 0)
-			setXPos(-1);
-		else
-			setXPos(1);
-		
-		if (yMove == 0)
-			setYPos(-1);
-		else
-			setYPos(1);
-	}
-	
-	public void collision() {
-		if (this.getXPos() < 100) {
-			setXPos(0);
-		}
-	}
-	
-	public void run() {
-		try {
-			while (true) {
-				move();
-				Thread.sleep(5);
-			}
-		}
-		catch (Exception e) { System.err.print(e.getMessage()); }
-	}
-	
 }
