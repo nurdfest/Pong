@@ -3,6 +3,9 @@ package game.pong.core;
 import java.awt.Rectangle;
 import java.util.Random;
 
+/*
+ * Just testing to see if this is added as a commit
+ */
 public class Ball implements Runnable {
 
 	private final int B_WIDTH = 10;
