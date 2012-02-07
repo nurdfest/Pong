@@ -12,8 +12,8 @@ public class Pong {
 	private static ArtificialIntel ai;
 	
 	public Pong(Ball b, ArtificialIntel ai) {
-		this.b = b;
-		this.ai = ai;
+		Pong.b = b;
+		Pong.ai = ai;
 	}
 	
 	/**
@@ -22,7 +22,7 @@ public class Pong {
 	 * @param args Command line arguments
 	 */
 	public static void main(String[] args) {
-		Window w = new Window();
+		new Window();
 		Thread t1 = new Thread(b);
 		Thread t2 = new Thread(ai);
 		

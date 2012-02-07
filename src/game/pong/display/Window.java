@@ -65,7 +65,7 @@ public class Window extends JFrame {
 		 */
 		addKeyListener(c);
 		
-		Pong p = new Pong(ball, ai);
+		new Pong(ball, ai);
 	}
 
 	/* Creates an image of the current window based on the window's

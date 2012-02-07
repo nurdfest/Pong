@@ -1,19 +1,17 @@
 package game.pong.core;
 
-import java.awt.Rectangle;
 import java.util.Random;
 
 public class ArtificialIntel implements Runnable {
 	
 	private Paddle p2;
-	private Rectangle r;
 	
 	private boolean resting = false;
 	private boolean needToMove = true;
 	
 	public ArtificialIntel(Paddle p) {
 		this.p2 = p;
-		r = p.getPaddleRectangle();
+		//r = p.getPaddleRectangle();
 	}
 
 	// Choose random direction
@@ -44,7 +42,6 @@ public class ArtificialIntel implements Runnable {
 					
 					if (needToMove) {
 						moveDirection = chooseRandomDirection();
-						System.out.println(moveDirection);
 						move(moveDirection);
 						needToMove = false;
 					}

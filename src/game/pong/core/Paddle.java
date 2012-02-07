@@ -19,7 +19,6 @@ public class Paddle {
 	private int yPos;
 	
 	// The rectangle drawn to the screen that represents a paddle.
-	@SuppressWarnings("unused")
 	private Rectangle paddle;
 	
 	
