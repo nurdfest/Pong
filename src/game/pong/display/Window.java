@@ -1,5 +1,6 @@
 package game.pong.display;
 
+import game.pong.core.ArtificialIntel;
 import game.pong.core.Ball;
 import game.pong.core.Controls;
 import game.pong.core.Paddle;
@@ -38,8 +39,9 @@ public class Window extends JFrame {
 	private Paddle p1 = new Paddle(p1start.x, p1start.y);
 	private Paddle p2 = new Paddle(p2start.x, p2start.y);
 	
+	private Ball ball = new Ball(centerOfWindow.x, centerOfWindow.y, p1, p2);
 	
-	private Ball ball = new Ball(centerOfWindow.x, centerOfWindow.y, p1);
+	private ArtificialIntel ai = new ArtificialIntel(p2);
 	
 	/**
 	 * Sole constructor. Initializes a new Window object.
@@ -63,7 +65,7 @@ public class Window extends JFrame {
 		 */
 		addKeyListener(c);
 		
-		Pong p = new Pong(ball);
+		Pong p = new Pong(ball, ai);
 	}
 
 	/* Creates an image of the current window based on the window's

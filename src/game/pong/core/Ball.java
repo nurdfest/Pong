@@ -15,12 +15,15 @@ public class Ball implements Runnable {
 	
 	private Rectangle ball;
 	
-	private Paddle paddle;
+	private Paddle paddle1;
+	private Paddle paddle2;
 	
-	public Ball(int xPos, int yPos, Paddle p) {
+	
+	public Ball(int xPos, int yPos, Paddle p1, Paddle p2) {
 		this.xPos = xPos;
 		this.yPos = yPos;
-		this.paddle = p;
+		this.paddle1 = p1;
+		this.paddle2 = p2;
 		
 		int xMove, yMove;
 		
@@ -67,11 +70,19 @@ public class Ball implements Runnable {
 			this.setYDir(-1);
 		}
 		
-		if (this.getBallRectangle().intersects(paddle.getPaddleRectangle())) {
+		if (this.getBallRectangle().intersects(paddle1.getPaddleRectangle())) {
+			this.setXDir(-1);
+		}
+		
+		if (this.getBallRectangle().intersects(paddle1.getPaddleRectangle())) {
 			this.setXDir(1);
 		}
 		
-		if (this.getBallRectangle().intersects(paddle.getPaddleRectangle())) {
+		if (this.getBallRectangle().intersects(paddle2.getPaddleRectangle())) {
+			this.setXDir(1);
+		}
+		
+		if (this.getBallRectangle().intersects(paddle2.getPaddleRectangle())) {
 			this.setXDir(-1);
 		}
 	}
@@ -80,7 +91,7 @@ public class Ball implements Runnable {
 		try {
 			while (true) {
 				move();
-				Thread.sleep(8);
+				Thread.sleep(6);
 			}
 		}
 		catch (Exception e) { System.err.print(e.getMessage()); }

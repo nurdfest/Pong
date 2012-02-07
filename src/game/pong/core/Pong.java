@@ -9,9 +9,11 @@ import game.pong.display.Window;
 public class Pong {
 	
 	private static Ball b;
+	private static ArtificialIntel ai;
 	
-	public Pong(Ball b) {
+	public Pong(Ball b, ArtificialIntel ai) {
 		this.b = b;
+		this.ai = ai;
 	}
 	
 	/**
@@ -22,6 +24,9 @@ public class Pong {
 	public static void main(String[] args) {
 		Window w = new Window();
 		Thread t1 = new Thread(b);
+		Thread t2 = new Thread(ai);
+		
 		t1.start();
+		t2.start();
 	}
 }
