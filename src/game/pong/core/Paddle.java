@@ -36,6 +36,11 @@ public class Paddle {
 		return paddle;
 	}
 	
+	public void updateRectangle(Rectangle p) {
+		p.x = this.getXPos();
+		p.y = this.getYPos();
+	}
+	
 	/**
 	 * Gets the width of a paddle.
 	 * @return The width of the paddle.
@@ -64,7 +69,7 @@ public class Paddle {
 	 * @param xPos The new x position of a paddle.
 	 */
 	public void setXPos(int xPos) {
-		this.xPos = xPos;
+		this.xPos += xPos;
 	}
 
 	/**
@@ -81,5 +86,6 @@ public class Paddle {
 	 */
 	public void setYPos(int yPos) {
 		this.yPos += yPos;
+		this.updateRectangle(paddle);
 	}
 }

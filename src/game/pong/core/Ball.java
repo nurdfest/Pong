@@ -44,15 +44,15 @@ public class Ball implements Runnable {
 	}
 	
 	public void move() {
+		
 		collision();
 		this.xPos += this.xDir;
 		this.yPos += this.yDir;
-
-		
+		updateBallRectangle(ball);
 	}
 	
 	public void collision() {
-		
+				
 		if (this.getXPos() <= 3) {
 			this.setXDir(1);
 		}
@@ -67,12 +67,11 @@ public class Ball implements Runnable {
 			this.setYDir(-1);
 		}
 		
-		if (ball.intersects(paddle.getPaddleRectangle())) {
-			System.out.println("IT WORKS");
+		if (this.getBallRectangle().intersects(paddle.getPaddleRectangle())) {
 			this.setXDir(1);
 		}
 		
-		if (ball.intersects(paddle.getPaddleRectangle())) {
+		if (this.getBallRectangle().intersects(paddle.getPaddleRectangle())) {
 			this.setXDir(-1);
 		}
 	}
@@ -81,7 +80,7 @@ public class Ball implements Runnable {
 		try {
 			while (true) {
 				move();
-				Thread.sleep(5);
+				Thread.sleep(8);
 			}
 		}
 		catch (Exception e) { System.err.print(e.getMessage()); }
@@ -93,6 +92,8 @@ public class Ball implements Runnable {
 
 	public void setXPos(int xPos) {
 		this.xPos += xPos;
+		this.updateBallRectangle(ball);
+		System.out.println(this.getXPos() + " " + this.getYPos());
 	}
 
 	public int getYPos() {
@@ -101,6 +102,7 @@ public class Ball implements Runnable {
 
 	public void setYPos(int yPos) {
 		this.yPos += yPos;
+		this.updateBallRectangle(ball);
 	}
 
 	public int getXDir() {
@@ -129,5 +131,10 @@ public class Ball implements Runnable {
 
 	public Rectangle getBallRectangle() {
 		return ball;
+	}
+	
+	public void updateBallRectangle(Rectangle b) {
+		b.x = this.getXPos();
+		b.y = this.getYPos();
 	}
 }
